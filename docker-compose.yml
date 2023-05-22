@@ -1,24 +1,15 @@
+version: '3'
 services:
-  app:
-    image: node:18-alpine
-    command: sh -c "yarn install && yarn run dev"
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: always
+
+  recortador:
+    build: .
+    container_name: recortador
     ports:
-      - 3000:3000
-    working_dir: /app
-    volumes:
-      - ./:/app
-    environment:
-      MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: secret
-      MYSQL_DB: todos
-
-  mysql:
-    image: mysql:8.0
-    volumes:
-      - todo-mysql-data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: todos
-
-volumes:
+      - 80:80
+    depends_on:
+      - redis
+    restart: always
