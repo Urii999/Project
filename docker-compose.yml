@@ -1,15 +1,17 @@
 version: '3'
 services:
-  redis:
-    image: redis:alpine
-    container_name: redis
+  db:
+    image: mysql:latest
     restart: always
-
-  recortador:
-    build: .
-    container_name: recortador
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    volumes:
+      - db_data:/var/lib/mysql
     ports:
-      - 80:80
-    depends_on:
-      - redis
-    restart: always
+      - 3306:3306
+
+volumes:
+  db_data:
