@@ -1,0 +1,43 @@
+
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .form-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .form-container button {
+    padding: 10px 20px;
+  }
+  /* styles.css */
+  
+  body {
+      font-family: Arial, sans-serif;
+    }
+    
+    #urlInput {
+      width: 300px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    
+    #shortenedUrl {
+      margin-top: 10px;
+    }
+    
+    #shortenButton {
+      background-color: #428bca;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    #shortenButton:hover {
+      background-color: #3071a9;
+    }
+    
