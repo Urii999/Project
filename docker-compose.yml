@@ -1,17 +1,20 @@
 version: '3'
 services:
-  db:
-    image: mysql:latest
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: mysecretpassword
-      MYSQL_DATABASE: mydatabase
-      MYSQL_USER: myuser
-      MYSQL_PASSWORD: mypassword
-    volumes:
-      - db_data:/var/lib/mysql
+  mongodb:
+    image: mongo
     ports:
-      - 3306:3306
-
-volumes:
-  db_data:
+      - "27017:27017"
+    volumes:
+      - ./data/mongodb:/data/db
+  nodeapp:
+    build: 
+      context: ./node
+      args:
+        NODE_ENV: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./node/src:/app
+    depends_on:
+      - mongodb
+    command: [ "npm", "run", "start-dev" ]
