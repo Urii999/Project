@@ -1,14 +1,17 @@
 const MongoDBUser = require('../models/user.model.mongodb');
 
+
 const auth = require('../services/auth.service.js');
 
 // Crear instancia de modelo dependiendo de la base de datos
-let userModel = new MongoDBUser();
 
+let userModel;
 
 // Create a new user
 exports.create = (req, res) => {
   const user = req.body;
+
+
   // check if any value is missing
   if (!user.name || !user.email || !user.password) {
     return res.status(400).send({
@@ -16,19 +19,20 @@ exports.create = (req, res) => {
     });
   }
   console.log("Usuario a crear", user);
-  
- //Check if exists
- userModel.getUserByEmail(user.email, (err, result) => {
-  if(err) return res.status(500).send(err);
-  if (result) return res.status(400).send({
-    message: "User already exists"
+
+
+  //Check if exists
+  userModel.getUserByEmail(user.email, (err, result) => {
+    if(err) return res.status(500).send(err);
+    if (result) return res.status(400).send({
+      message: "User already exists"
+    });
+    userModel.create(user).then((err, result) => {
+      res.status(200).send({user, token: auth.signToken(user)});
+    }).catch((err) => {
+      console.log("Error en la creacion", err);
+    });
   });
-  userModel.create(user).then((err, result) => {
-    res.status(200).send({user, token: auth.signToken(user)});
-  }).catch((err) => {
-    console.log("Error en la creacion", err);
-  });
-});
 };
 
 exports.login = (req, res) => {
@@ -44,7 +48,7 @@ exports.login = (req, res) => {
     if (!result) return res.status(404).send("User not found");
     if (result.password != user.password) return res.status(401).send("Invalid password");
     delete result.password;
-    res.status(200).send({user: result, token: auth.signToken(result)});
+   res.status(200).send({user: result, token: auth.signToken(result)});
   });
 }
   
@@ -79,7 +83,7 @@ exports.findOne = (req, res) => {
   userModel.get(userId, (err, result) => {
     if (err) return res.status(500).send(err);
     if (!result) return res.status(404).send("User not found");
-    res.status(200).send(result);
+    res.sendStatus(200);
   });
 };
 

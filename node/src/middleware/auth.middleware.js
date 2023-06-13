@@ -2,7 +2,7 @@ const auth = require('../services/auth.service');
 
 const authenticate = (req, res, next) => {
     const token = req.header('Authorization');
-    if (!token) return res.status(401).send('Access denied. No token provided.');
+    if (!token) return res.status(400).send('Access denied. No token provided.');
   
     try {
       const decoded = auth.verifyToken(token);
