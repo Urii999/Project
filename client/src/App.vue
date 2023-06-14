@@ -17,6 +17,11 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/login">Login</RouterLink>
         <RouterLink to="/register">Register</RouterLink>
       </nav>
+
+      <footer>
+      <p>&copy; 2023 My App. All rights reserved.</p>
+    </footer>
+
     </div>
 
   </header>
@@ -27,6 +32,10 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <style scoped>
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
 header {
   line-height: 1.5;
@@ -91,4 +100,5 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 }
+
 </style>
