@@ -50,7 +50,7 @@ app.post('/api/register', async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
-    res.status(201).json({ message: 'Usuario registrado exitosamente.' });
+    res.status(200).json({ message: 'Usuario registrado exitosamente.' });
   } catch (error) {
     res.status(500).json({ error: 'Ocurrió un error al registrar el usuario.' });
   }

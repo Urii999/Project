@@ -1,5 +1,7 @@
-const User = require('./user.model');
+
 const mongoClient = require('../services/mongodb.service');
+const User = require('./user.model');
+var mongo = require('mongodb');
 
 class MongoDBUser extends User {
   constructor(database) {
@@ -12,26 +14,18 @@ class MongoDBUser extends User {
       if (err) return cb(err);
       cb(null, result.insertedId.toString());
     });
-
-    /*
-    this.collection.insertOne(user, (err, result) => {
-      if (err) return (err);
-      // client.close();
-      return result;
-    });
-*/
-
-    //const result = await this.collection.insertOne(user);
-    //return result.insertedId.toString();
   }
 
-  get(id) {
-    const result = this.collection.findOne({ _id: id });
-    return result;
+  get(id, cb) {
+    this.collection.findOne({ _id: mongo.ObjectId(id)}).then((result) => {
+      cb(null,result);
+    } ).catch((err) => {
+      cb(err);
+    });
   }
 
    getAll() {
-    const result = this.collection.find().toArray();
+    this.collection.find().toArray();
     return result;
   }
 
@@ -44,17 +38,17 @@ class MongoDBUser extends User {
   }
 
    getIdByEmail(email) {
-    const result = this.collection.findOne({ email: email }, { projection: { _id: 1 } });
+    this.collection.findOne({ email: email }, { projection: { _id: 1 } });
     return result && result._id.toString();
   }
 
    update(id, updates) {
-    const result =  this.collection.updateOne({ _id: id }, { $set: updates });
+     this.collection.updateOne({ _id: id }, { $set: updates });
     return result.modifiedCount > 0;
   }
 
    delete(id) {
-    const result = this.collection.deleteOne({ _id: id });
+    this.collection.deleteOne({ _id: id });
     return result.deletedCount > 0;
   }
 }

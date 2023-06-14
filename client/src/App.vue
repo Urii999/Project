@@ -4,12 +4,13 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
+
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+   <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />  -->
+     
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
+      <HelloWorld msg="Bienvenido al recortador de enlaces!" />
+      
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
@@ -17,15 +18,20 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/register">Register</RouterLink>
       </nav>
     </div>
+
   </header>
 
-  <RouterView />
+  <RouterView/>
+
 </template>
 
 <style scoped>
+
+
 header {
   line-height: 1.5;
   max-height: 100vh;
+
 }
 
 .logo {
@@ -64,6 +70,7 @@ nav a:first-of-type {
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
   }
+
 
   .logo {
     margin: 0 2rem 0 0;
