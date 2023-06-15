@@ -17,6 +17,7 @@ exports.create = (req, res) => {
   console.log("Usuario a crear", user);
 
   //Check if exists
+  
   userModel.getUserByEmail(user.email, (err, result) => {
     if (err) return res.status(500).send(err);
     if (result) return res.status(400).send({
