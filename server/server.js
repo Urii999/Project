@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-const mongouser = ''
-const mongopsw = ''
-const mongocluster = ''
+const mongouser = 'root'
+const mongopsw = 'root'
+const mongocluster = '27017'
+const database = 'api'
 
 //MONGO_HOST=mongodb
 //MONGO_PORT=27017
@@ -22,17 +23,17 @@ app.use(express.json());
 app.use(cors());
 
 // Conexión a la base de datos MongoDB
-mongoose.connect(`mongodb+srv://${mongouser}:${mongopsw}@${mongocluster}`,
 
-//mongoose.connect('mongodb://localhost/27017')
-{
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('Conectado a la base de datos');
-}).catch((error) => {
-  console.error('Error de conexión a la base de datos:', error);
-});
+mongoose.connect(`mongodb+srv://${mongouser}:${mongopsw}@${mongocluster}/${database}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+    .then(() => {
+      console.log('Conectado a la base de datos');
+    })
+    .catch((error) => {
+      console.error('Error de conexión a la base de datos:', error);
+    });
 
 
 
@@ -57,7 +58,6 @@ app.post('/api/register', async (req, res) => {
 });
 
 // Iniciar el servidor
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Servidor backend iniciado en http://localhost:${port}`);
+app.listen(3001, function() {
+  console.log('Servidor escuchando en el puerto 3001');
 });

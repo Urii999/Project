@@ -2,7 +2,7 @@ const MongoDBUser = require('../models/user.model.mongodb');
 const auth = require('../services/auth.service.js');
 
 // Crear instancia de modelo dependiendo de la base de datos
-const userModel = new MongoDBUser();
+let userModel = new MongoDBUser();
 
 // Create a new user
 exports.create = (req, res) => {
