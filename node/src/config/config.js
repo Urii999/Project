@@ -1,4 +1,5 @@
 require("dotenv").config({path:__dirname+'/../.env'});
+//require('dotenv').config();
 
 const config = {
   PORT: process.env.PORT || 3000,
@@ -14,5 +15,6 @@ const config = {
   MONGO_DATABASE: process.env.MONGO_DATABASE || "",
   
 };
+
 
 module.exports = config;

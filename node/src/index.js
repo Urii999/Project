@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const config = require("../node/src/config/config");
 
-const config = require("./config/config");
+//const config = require("./config/config");
 const UserRouter = require('./routes/user.route');
 const UrlRouter = require('./routes/url.route');
 
@@ -20,7 +21,11 @@ app.use('/api/users', UserRouter);
 app.use('/api/urls', UrlRouter);
 
 // Start the server
-app.listen(port, () => {
+
+app.listen(port, (error) => {
+  if (error) {
+    console.error('Error al iniciar el servidor:', error);
+    return;
+  }
   console.log(`API server is listening on port ${port}`);
 });
-
