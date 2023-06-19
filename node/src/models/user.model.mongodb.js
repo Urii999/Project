@@ -10,9 +10,10 @@ class MongoDBUser extends User {
   }
 
   create(user, cb) {
-    this.collection.insertOne(user, (err, result) => {
-      if (err) return cb(err);
-      cb(null, result.insertedId.toString());
+    this.collection.insertOne(user).then((result) => {
+      cb(null, result);
+    }).catch((err) => {
+      cb(err);
     });
   }
 
@@ -21,8 +22,8 @@ class MongoDBUser extends User {
       cb(null,result);
     } ).catch((err) => {
       cb(err);
-    });
-  }
+    });}
+
 
    getAll() {
     this.collection.find().toArray();

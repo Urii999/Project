@@ -29,10 +29,7 @@ const userModel= new MongoDBUser();
 // Create a new user
 exports.create = (req, res) => {
   const user = req.body;
-
-
   // check if any value is missing
-
   if (!user.name || !user.email || !user.password) {
     return res.status(400).send({
       message: "Content can not be empty"
@@ -40,23 +37,21 @@ exports.create = (req, res) => {
   }
   console.log("Usuario a crear", user);
 
-
   //Check if exists
-  
-userModel.getUserByEmail(user.email, (err, result) => {
-
-  console.log("Error"+ err)
-  console.log("Result"+ result)
-
+  userModel.getUserByEmail(user.email, (err, result) => {
+    console.log("Error"+ err)
+    console.log("Result"+ result)
 
     if(err) return res.status(500).send(err);
     if (result) return res.status(400).send({
       message: "User already exists"
     });
-    userModel.create(user).then((err, result) => {
-      res.status(200).send({user, token: auth.signToken(user)});
-    }).catch((err) => {
-      console.log("Error en la creacion", err);
+    
+    userModel.create(user,(error, resultado) => {
+      console.log("err: " + error)
+      console.log("result: " + resultado);
+      if (err) return res.status(500).send(err);
+      res.status(200).send({user,token:auth.signToken(user)})
     });
   });
 };
