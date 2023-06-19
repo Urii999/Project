@@ -1,6 +1,6 @@
 const MongoDBUser = require('../models/user.model.mongodb');
 const auth = require('../services/auth.service.js');
-const config = require("../node/src/config/config");
+const config = require("../config/config");
 
 // Crear instancia de modelo dependiendo de la base de datos
 

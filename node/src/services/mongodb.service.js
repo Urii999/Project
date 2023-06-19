@@ -1,16 +1,17 @@
 const { MongoClient } = require('mongodb');
-const config = require("../node/src/config/config");
+const config = require("../config/config");
 //const config = require("../config/config");
 
 //const uri = `mongodb://MONGO_HOST:MONGO_PORT/ MONGO_DATABASE`;
 //mongodb://localhost:27017/mydatabase
 
+const uri = `mongodb://mongodb:27017`;
 
 const hostname = process.env.MONGO_HOST;
 const port = process.env.MONGO_PORT;
 const database = process.env.MONGO_DATABASE;
 
-const uri = `mongodb://${hostname}:${port}/${database}`;
+//const uri = `mongodb://${hostname}:${port}/${database}`;
 
 
 const mongodbClient = new MongoClient(uri, { useNewUrlParser: false, useUnifiedTopology: true });
