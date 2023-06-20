@@ -8,9 +8,12 @@ let result = ref('');
 
 
 //fetch('https://pokeapi.co/api/v2/pokemon/ditto').then( x => x.json() ).then( resp => console.log(resp));
-fetch('http://localhost:3333/api/short').then( x => x.json() ).then( resp => console.log(resp));
+//fetch('http://localhost:3333/api/short').then( x => x.json() ).then( resp => console.log(resp));
 
-
+fetch('http://localhost:3333/api/short')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
 
 async function shorten() {
   console.log('url:', inputUrl.value);
