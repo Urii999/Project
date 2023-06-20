@@ -1,6 +1,7 @@
 const MongoDBUser = require('../models/user.model.mongodb');
 const auth = require('../services/auth.service.js');
 const config = require("../config/config");
+const { ReturnDocument } = require('mongodb');
 
 // Crear instancia de modelo dependiendo de la base de datos
 
@@ -47,9 +48,8 @@ exports.create = (req, res) => {
       message: "User already exists"
     });
     
-    userModel.create(user,(error, resultado) => {
-      console.log("err: " + error)
-      console.log("result: " + resultado);
+
+    userModel.create(user,(err, result) => {
       if (err) return res.status(500).send(err);
       res.status(200).send({user,token:auth.signToken(user)})
     });

@@ -11,10 +11,13 @@ class MongoDBUser extends User {
 
   create(user, cb) {
     this.collection.insertOne(user).then((result) => {
-      cb(null, result);
-    }).catch((err) => {
+      if(err) return cb (err);
+      cb(null, result.insertedId.toString);
+    })
+    .catch((err) => {
       cb(err);
     });
+  
   }
 
   get(id, cb) {
