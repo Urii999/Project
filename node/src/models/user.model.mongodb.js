@@ -18,11 +18,14 @@ class MongoDBUser extends User {
   }
 
   get(id, cb) {
-    this.collection.findOne({ _id: mongo.ObjectId(id)}).then((result) => {
-      cb(null,result);
-    } ).catch((err) => {
-      cb(err);
-    });}
+    this.collection.findOne({ _id: mongo.ObjectId(id) })
+      .then((result) => {
+        cb(null, result);
+      })
+      .catch((err) => {
+        cb(err);
+      });
+  }
 
 
    getAll() {
@@ -40,7 +43,6 @@ class MongoDBUser extends User {
 
    getIdByEmail(email) {
     this.collection.findOne({ email: email }, { projection: { _id: 1 } });
-    sdfg
     return result && result._id.toString();
   }
 

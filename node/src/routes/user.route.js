@@ -23,6 +23,3 @@ router.put('/:id', auth.checkAuth, userController.update);
 router.delete('/:id', auth.checkAuth, userController.delete);
 
 module.exports = router;
-
-// Otorgar privilegios de administrador a un usuario con id
-router.put('/admin/:id', auth.authenticate, auth.authenticateAdmin, userController.otorgarPrivilegiosAdmin);

@@ -104,11 +104,12 @@ exports.findOne = (req, res) => {
   userModel.get(userId, (err, result) => {
     if (err) return res.status(500).send(err);
     if (!result) return res.status(404).send("User not found");
-    res.sendStatus(200);
+    res.status(200).send(result);
   });
-}
+};
+
 // Añadir admin: true a un usuario existente
-exports.addAdmin = async (req, res) => {
+/*exports.addAdmin = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -129,8 +130,7 @@ exports.addAdmin = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Error interno del servidor' });
   }
-}
-
+}*/
 
 // Delete a user
 exports.delete = (req, res) => {
