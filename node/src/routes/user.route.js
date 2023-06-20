@@ -9,7 +9,9 @@ router.post('/login', userController.login);
 
 // Retrieve all users
 router.get('/', auth.authenticate, auth.authenticateAdmin, userController.findAll);
-// Añadir en la base de datos: admin : true.
+
+// Añadir admin: true a un usuario existente
+//router.put('/admin/:id', auth.authenticate, auth.authenticateAdmin, userController.addAdmin);
 
 // Retrieve a single user with id
 router.get('/:id', auth.checkAuth, userController.findOne);

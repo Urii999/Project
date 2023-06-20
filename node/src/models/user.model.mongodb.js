@@ -21,11 +21,14 @@ class MongoDBUser extends User {
   }
 
   get(id, cb) {
-    this.collection.findOne({ _id: mongo.ObjectId(id)}).then((result) => {
-      cb(null,result);
-    } ).catch((err) => {
-      cb(err);
-    });}
+    this.collection.findOne({ _id: mongo.ObjectId(id) })
+      .then((result) => {
+        cb(null, result);
+      })
+      .catch((err) => {
+        cb(err);
+      });
+  }
 
 
    getAll() {

@@ -5,11 +5,11 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="Bienvenido al recortador de enlaces!" />
-      <img alt="tijeras" class="logo" src="@/assets/tijeras.png" width="125" height="125" />
-      <img alt="tijeras2" class="logo" src="@/assets/tijeras.gif" width="125" height="125" />
+      <HelloWorld msg="You did it!" />
+
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/login">Login</RouterLink>
