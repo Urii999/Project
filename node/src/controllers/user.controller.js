@@ -37,24 +37,22 @@ exports.create = (req, res) => {
     });
   }
   console.log("Usuario a crear", user);
+}
 
   //Check if exists
   userModel.getUserByEmail(user.email, (err, result) => {
     console.log("Error"+ err)
     console.log("Result"+ result)
 
-    if(err) return res.status(500).send(err);
-    if (result) return res.status(400).send({
+      if(err) return res.status(500).send(err);
+      if (result) return res.status(400).send({
       message: "User already exists"
-    });
-    
-
-    userModel.create(user,(err, result) => {
+      });
+      userModel.create(user,(err, result) => {
       if (err) return res.status(500).send(err);
-      res.status(200).send({user,token:auth.signToken(user)})
+      res.status(200).send({user,token: auth.signToken(user)})
     });
   });
-};
 
 exports.login = (req, res) => {
   const user = req.body;
@@ -63,7 +61,8 @@ exports.login = (req, res) => {
     return res.status(400).send({
       message: "Content can not be empty"
     });
-  }
+  }}
+
   userModel.getUserByEmail(user.email, (err, result) => {
     if (err) return res.status(500).send(err);
     if (!result) return res.status(404).send("User not found");
@@ -71,8 +70,7 @@ exports.login = (req, res) => {
     delete result.password;
    res.status(200).send({user: result, token: auth.signToken(result)});
   });
-}
-  
+
 
 // Edit an existing user
 exports.update = (req, res) => {

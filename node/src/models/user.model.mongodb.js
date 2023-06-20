@@ -8,17 +8,18 @@ class MongoDBUser extends User {
     super(database);
     this.collection = mongoClient.db('api').collection('users');
   }
+ 
 
   create(user, cb) {
     this.collection.insertOne(user).then((result) => {
-      if(err) return cb (err);
-      cb(null, result.insertedId.toString);
-    })
-    .catch((err) => {
+      cb(null, result);
+    }) .catch((err) => {
       cb(err);
     });
-  
   }
+
+  
+  
 
   get(id, cb) {
     this.collection.findOne({ _id: mongo.ObjectId(id) })
