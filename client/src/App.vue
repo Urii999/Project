@@ -4,44 +4,29 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-
   <header>
-   <!--<img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />  -->
-     
+
     <div class="wrapper">
-      <HelloWorld msg="Bienvenido al recortador de enlaces!" />
-      
+      <HelloWorld msg="Bienvenido al Rcortador de enlaces!" />
+      <img alt="Tijeras" class="logo" src="@/assets/tijeras.png" width="125" height="125" />
+      <img alt="Tijeras gif" class="logo" src="@/assets/tijeras.gif" width="125" height="125" />
+
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/login">Login</RouterLink>
         <RouterLink to="/register">Register</RouterLink>
+        <RouterLink to="/short">Short</RouterLink>
       </nav>
-
-      <footer>
-      <p>&copy; 2023 My App. All rights reserved.</p>
-    </footer>
-
     </div>
-
   </header>
 
-  <RouterView/>
-
+  <RouterView />
 </template>
 
 <style scoped>
-
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-
 header {
   line-height: 1.5;
   max-height: 100vh;
-
 }
 
 .logo {
@@ -81,7 +66,6 @@ nav a:first-of-type {
     padding-right: calc(var(--section-gap) / 2);
   }
 
-
   .logo {
     margin: 0 2rem 0 0;
   }
@@ -101,5 +85,4 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 }
-
 </style>

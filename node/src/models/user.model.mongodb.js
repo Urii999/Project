@@ -40,6 +40,7 @@ class MongoDBUser extends User {
 
    getIdByEmail(email) {
     this.collection.findOne({ email: email }, { projection: { _id: 1 } });
+    sdfg
     return result && result._id.toString();
   }
 

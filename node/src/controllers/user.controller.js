@@ -106,7 +106,31 @@ exports.findOne = (req, res) => {
     if (!result) return res.status(404).send("User not found");
     res.sendStatus(200);
   });
-};
+}
+// Añadir admin: true a un usuario existente
+exports.addAdmin = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Buscar el usuario en la base de datos
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    // Actualizar el campo admin a true
+    user.admin = true;
+
+    // Guardar el usuario actualizado
+    await user.save();
+
+    res.status(200).json({ message: 'Se agregó el campo admin: true al usuario correctamente' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error interno del servidor' });
+  }
+}
+
 
 // Delete a user
 exports.delete = (req, res) => {
