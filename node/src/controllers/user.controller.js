@@ -1,7 +1,6 @@
 const MongoDBUser = require('../models/user.model.mongodb');
 const auth = require('../services/auth.service.js');
 const config = require("../config/config");
-const { ReturnDocument } = require('mongodb');
 
 // Crear instancia de modelo dependiendo de la base de datos
 
@@ -37,22 +36,25 @@ exports.create = (req, res) => {
     });
   }
   console.log("Usuario a crear", user);
-}
 
   //Check if exists
   userModel.getUserByEmail(user.email, (err, result) => {
     console.log("Error"+ err)
     console.log("Result"+ result)
 
-      if(err) return res.status(500).send(err);
-      if (result) return res.status(400).send({
+    if(err) return res.status(500).send(err);
+    if (result) return res.status(400).send({
       message: "User already exists"
-      });
-      userModel.create(user,(err, result) => {
+    });
+    
+    userModel.create(user,(error, resultado) => {
+      console.log("err: " + error)
+      console.log("result: " + resultado);
       if (err) return res.status(500).send(err);
-      res.status(200).send({user,token: auth.signToken(user)})
+      res.status(200).send({user,token:auth.signToken(user)})
     });
   });
+};
 
 exports.login = (req, res) => {
   const user = req.body;
@@ -61,8 +63,7 @@ exports.login = (req, res) => {
     return res.status(400).send({
       message: "Content can not be empty"
     });
-  }}
-
+  }
   userModel.getUserByEmail(user.email, (err, result) => {
     if (err) return res.status(500).send(err);
     if (!result) return res.status(404).send("User not found");
@@ -70,7 +71,8 @@ exports.login = (req, res) => {
     delete result.password;
    res.status(200).send({user: result, token: auth.signToken(result)});
   });
-
+}
+  
 
 // Edit an existing user
 exports.update = (req, res) => {
@@ -102,33 +104,9 @@ exports.findOne = (req, res) => {
   userModel.get(userId, (err, result) => {
     if (err) return res.status(500).send(err);
     if (!result) return res.status(404).send("User not found");
-    res.status(200).send(result);
+    res.sendStatus(200);
   });
 };
-
-// Añadir admin: true a un usuario existente
-/*exports.addAdmin = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    // Buscar el usuario en la base de datos
-    const user = await User.findById(id);
-
-    if (!user) {
-      return res.status(404).json({ message: 'Usuario no encontrado' });
-    }
-
-    // Actualizar el campo admin a true
-    user.admin = true;
-
-    // Guardar el usuario actualizado
-    await user.save();
-
-    res.status(200).json({ message: 'Se agregó el campo admin: true al usuario correctamente' });
-  } catch (error) {
-    res.status(500).json({ message: 'Error interno del servidor' });
-  }
-}*/
 
 // Delete a user
 exports.delete = (req, res) => {
@@ -140,4 +118,3 @@ exports.delete = (req, res) => {
     });
   });
 };
-

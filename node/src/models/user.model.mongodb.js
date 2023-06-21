@@ -1,4 +1,3 @@
-
 const mongoClient = require('../services/mongodb.service');
 const User = require('./user.model');
 var mongo = require('mongodb');
@@ -8,28 +7,21 @@ class MongoDBUser extends User {
     super(database);
     this.collection = mongoClient.db('api').collection('users');
   }
- 
 
   create(user, cb) {
     this.collection.insertOne(user).then((result) => {
       cb(null, result);
-    }) .catch((err) => {
+    }).catch((err) => {
       cb(err);
     });
   }
 
-  
-  
-
   get(id, cb) {
-    this.collection.findOne({ _id: mongo.ObjectId(id) })
-      .then((result) => {
-        cb(null, result);
-      })
-      .catch((err) => {
-        cb(err);
-      });
-  }
+    this.collection.findOne({ _id: mongo.ObjectId(id)}).then((result) => {
+      cb(null,result);
+    } ).catch((err) => {
+      cb(err);
+    });}
 
 
    getAll() {
