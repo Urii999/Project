@@ -3,11 +3,11 @@ const express = require('express');
 const cors = require('cors');
 //const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const config = require("./config/config");
+const config = require("./src/config/config");
 
 
-const UserRouter = require('./routes/user.route');
-const UrlRouter = require('./routes/url.route');
+const UserRouter = require('./src/routes/user.route');
+const UrlRouter = require('./src/routes/url.route');
 
 
 // Otro código del servidor...
