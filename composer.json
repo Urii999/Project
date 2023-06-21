@@ -1,0 +1,14 @@
+{
+    "name": "uri/project",
+    "autoload": {
+        "psr-4": {
+            "Uri\\Project\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "uri"
+        }
+    ],
+    "require": {}
+}
